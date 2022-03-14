@@ -20,6 +20,7 @@ function generatePassword() {
   switch(chars) {
     // w/ capitals
     case 1:
+      
       var gen = function generate(passwordLength) {
         var characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         let result = ' ';
