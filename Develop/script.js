@@ -17,89 +17,43 @@ const symbols = "!@#$%^&*_-+=";
 var generateBtn = document.querySelector("#generate");
 
 var passwordLength = prompt("How many characters would you like your password to contain?");
-var withUpper = confirm("Would you like your password to contain upper-case letters?\n\nEx. ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+var withLowers = confirm("Would you like your password to contain lower-case letters?\n\nEx. abcdefghijklmnopqrstuvwxyz")
+var withUppers = confirm("Would you like your password to contain upper-case letters?\n\nEx. ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 var withNumbers = confirm("Would you like your password to contain numbers?\n\nEx. 0123456789")
 var withSymbols = confirm("Would you like your password to contain symbols?\n\nEx. !@#$%^&*_-+=")
 
 
-function generatePassword (length, characters) {
-  let password = "";
-  for (let i = 0; i < length; i++) {
-    // all criteria
-    if (withUpper && withNumbers && withSymbols) {
-      let characters = alpha + alphaUpper + numbers + symbols
-      password += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-      return password;
+function generatePassword () {
+  var password = "";
 
-    }
-    // no numbers
-    else if (withUpper && !withNumbers && withSymbols) {
-      let characters = alpha + alphaUpper + symbols
-      password += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-      return password;
-
-    }
-    // no upper-case
-    else if (!withUpper && withNumbers && withSymbols) {
-      let characters = alpha + numbers + symbols
-      password += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-      return password;
-
-    }
-    // no upper-case, numbers
-    else if (!withUpper && !withNumbers && withSymbols) {
-      let characters = alpha + symbols
-      password += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-      return password;
-
-    }
-      // no upper-case, symbols
-    else if (!withUpper && withNumbers && !withSymbols) {
-      let characters = alpha + numbers
-      password += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-      return password;
-
-    }
-    // no symbols
-    else if (withUpper && withNumbers && !withSymbols) {
-      let characters = alpha + alphaUpper + numbers
-      password += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-      return password;
-
-    }
-      // no numbers, symbols
-    else if (withUpper && !withNumbers && !withSymbols) {
-      let characters = alpha + numbers
-      password += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-      return password;
-
+  for (var i = 0; i < passwordLength; i++) {
+    if(withLowers) {
+      password += alpha.charAt(Math.floor(Math.random() * passwordLength));
     }
   
+    if(withUppers) {
+      password += alphaUpper.charAt(Math.floor(Math.random() * passwordLength));
+    }
+  
+    if(withNumbers) {
+      password += numbers.charAt(Math.floor(Math.random() * passwordLength));
+    }
+  
+    if(withSymbols) {
+      password += symbols.charAt(Math.floor(Math.random() * passwordLength));
+    }
   }
-  return password;
+
+  return password
   
 };
 
 // Write password to the #password input
 function writePassword() {
+  var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  // var characters = alpha
 
-  passwordText.value = generatePassword();
+  passwordText.value = password;
 
 }
 
